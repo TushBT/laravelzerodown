@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/job', function () {
     \App\Jobs\TestJob::dispatch();
     return 'Job Run';
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('job');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

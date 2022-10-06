@@ -2,21 +2,17 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require 'contrib/npm.php';
 
 // Config
 
 set('repository', 'https://github.com/TushBT/laravelzerodown.git');
-
-add('shared_files', []);
-add('shared_dirs', []);
-add('writable_dirs', []);
-
+set ('ssh_multiplexing', false);
 // Hosts
 
 host('13.233.107.109')
-    ->set('remote_user', 'admin')
-    ->set('deploy_path', '/home/mylaravel/htdocs/
-    mylaravel.com/');
+    ->set('remote_user', 'mylaravel')
+    ->set('deploy_path', '/home/mylaravel/htdocs/mylaravel.com');
 
 // Hooks
 task('deploy', [
