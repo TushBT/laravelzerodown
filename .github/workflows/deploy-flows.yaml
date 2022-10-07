@@ -1,0 +1,36 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+# It is important to specify "concurrency" for the workflow,
+# to prevent concurrency between different deploys.
+concurrency: production_environment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Download `deployer.phar`
+        run: composer global require deployer/deployer --no-interaction --verbose --ansi
+
+      - name: Get composer global bin-dir path
+        id: composer-bin-dir
+        run: echo "::set-output name=path::$(composer global config bin-dir --absolute)"
+
+      - name: Deploy
+        uses: deployphp/action@v1
+        with:
+          dep: deploy
+          deployer-binary: ${{ steps.composer-bin-dir.outputs.path }}/dep
+          private-key: ${{ secrets.PRIVATE_KEY }}
