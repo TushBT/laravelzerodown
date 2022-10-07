@@ -23,7 +23,6 @@ host('13.233.54.179')
         'artisan:event:cache',
         'artisan:migrate',
         'npm:install',
-        'npm:run:build',
         'deploy:publish',
         'artisan:horizon:terminate',
     ]);
@@ -32,5 +31,7 @@ host('13.233.54.179')
         cd('{{deploy_path}}' . '/current/');
         run('npm run build');
     });
+
+after('deploy:symlink', 'npm:run:build');
 
 after('deploy:failed', 'deploy:unlock');
