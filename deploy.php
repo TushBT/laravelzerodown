@@ -23,14 +23,14 @@ host('13.233.54.179')
         'artisan:event:cache',
         'artisan:migrate',
         'npm:install',
-        'npm:run:prod',
+        'npm:run:build',
         'deploy:publish',
         'artisan:horizon:terminate',
     ]);
 
-    task('npm:run:prod', function () {
+    task('npm:run:build', function () {
         cd('{{release_path}}');
-        run('npm run prod');
+        run('npm run build');
     });
 
 after('deploy:failed', 'deploy:unlock');
