@@ -29,7 +29,7 @@ host('13.233.54.179')
     ]);
 
     task('npm:run:build', function () {
-        cd('{{release_path}}');
+        cd('{{deploy_path}}' . '/current/');
         run('npm run build');
     });
 
