@@ -12,7 +12,8 @@
         "laravel/horizon": "^5.10",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "opcodesio/log-viewer": "^1.4"
+        "opcodesio/log-viewer": "^1.4",
+        "rap2hpoutre/laravel-log-viewer": "^2.2"
     },
     "require-dev": {
         "deployer/deployer": "^7.0",
