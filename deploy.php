@@ -22,9 +22,9 @@ host('143.110.244.86')
         'artisan:view:cache',
         'artisan:event:cache',
         'artisan:migrate',
-        //'npm:install',
+        'npm:install',
         'deploy:publish',
-        //'artisan:horizon:terminate',
+        'artisan:horizon:terminate',
     ]);
 
     task('npm:run:build', function () {
@@ -32,7 +32,7 @@ host('143.110.244.86')
         run('npm run build');
     });
 
-//after('deploy:symlink', 'npm:run:build');
+after('deploy:symlink', 'npm:run:build');
 
 after('deploy:failed', 'deploy:unlock');
 
