@@ -9,9 +9,9 @@ set('repository', 'https://github.com/TushBT/laravelzerodown.git');
 set ('ssh_multiplexing', false);
 // Hosts
 
-host('134.209.151.187')
+host('143.110.244.86')
     ->set('remote_user', 'ubuntu')
-    ->set('deploy_path', '/home/ubuntu/www.livealoo.com/prod/');
+    ->set('deploy_path', '/home/ubuntu/www/livealoo.com');
 
     task('deploy', [
         'deploy:prepare',
@@ -22,9 +22,9 @@ host('134.209.151.187')
         'artisan:view:cache',
         'artisan:event:cache',
         'artisan:migrate',
-        'npm:install',
+        //'npm:install',
         'deploy:publish',
-        'artisan:horizon:terminate',
+        //'artisan:horizon:terminate',
     ]);
 
     task('npm:run:build', function () {
@@ -32,7 +32,7 @@ host('134.209.151.187')
         run('npm run build');
     });
 
-after('deploy:symlink', 'npm:run:build');
+//after('deploy:symlink', 'npm:run:build');
 
 after('deploy:failed', 'deploy:unlock');
 
